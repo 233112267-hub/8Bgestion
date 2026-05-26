@@ -7,38 +7,41 @@
 <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-page="registro">
 
 <section class="formulario">
 
-    <div class="izquierda">
-
-        <div class="switch"></div>
-
-        <input type="text" placeholder="Nombre">
-        <input type="text" placeholder="Correo">
-        <input type="text" placeholder="Usuario">
-
-    </div>
-
-    <div class="derecha">
-
-        <input type="text" placeholder="Carrera">
-        <input type="password" placeholder="Contraseña">
-
-        <div class="codigo">
-            <input type="text">
-            <input type="text">
-            <input type="text">
-            <input type="text">
-            <input type="text">
+    <form id="registerForm">
+        <div class="form-head">
+            <h1>Registro</h1>
+            <p>Completa tus datos para crear tu usuario.</p>
         </div>
 
-        <input type="text" placeholder="Código">
+        <div class="switch" id="typeSwitch" role="button" tabindex="0" aria-label="Cambiar tipo de usuario"></div>
 
-    </div>
+        <div class="fields-grid">
+            <input id="registerName" type="text" placeholder="Nombre">
+            <input id="registerEmail" type="email" placeholder="Correo">
+            <input id="registerUser" type="text" placeholder="Usuario">
+            <input id="registerCareer" type="text" placeholder="Carrera">
+            <input id="registerPassword" type="password" placeholder="Contraseña">
+        </div>
+
+        <div class="codigo">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+        </div>
+
+        <input id="registerCode" type="text" placeholder="Código completo" readonly>
+        <button type="submit">Registrar</button>
+        <p id="registerMessage" class="message"></p>
+    </form>
 
 </section>
 
+<script src="app.js" defer></script>
 </body>
 </html>
