@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asesorías</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body data-page="asesorias">
+
+<section class="panel">
+
+    <aside class="sidebar">
+
+        <div class="user">
+            <div class="avatar"></div>
+            <p>Mike Dean</p>
+        </div>
+
+        <nav class="menu">
+            <a href="#" data-nav="index.html">🏠 Home</a>
+            <a href="#" data-nav="asesorias.html">📄 Asesorías</a>
+            <a href="#" data-nav="solicitudes.html">📄 Solicitudes</a>
+            <a href="#" data-nav="registro.html">📝 Registro</a>
+        </nav>
+
+    </aside>
+
+    <div class="barra azul"></div>
+
+    <main class="contenido">
+
+        <div class="page-header">
+            <h2>Asesorías disponibles</h2>
+            <p>Solicita y administra tus asesorías desde aquí.</p>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Materia</th>
+                        <th>Profesor</th>
+                        <th>Horario</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="availableTableBody">
+                    <tr>
+                        <td>Juan</td>
+                        <td>POO</td>
+                        <td>Mario</td>
+                        <td>9AM</td>
+                        <td><button class="action-btn">Solicitar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Ana</td>
+                        <td>BD</td>
+                        <td>Laura</td>
+                        <td>10AM</td>
+                        <td><button class="action-btn">Solicitar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="page-header">
+            <h2>Mis Asesorías</h2>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Materia</th>
+                        <th>Profesor</th>
+                        <th>Horario</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="myTableBody">
+                    <tr>
+                        <td>Carlos</td>
+                        <td>Redes</td>
+                        <td>Jose</td>
+                        <td>1PM</td>
+                        <td><button class="action-btn">Cancelar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Sofia</td>
+                        <td>Web</td>
+                        <td>Maria</td>
+                        <td>3PM</td>
+                        <td><button class="action-btn">Cancelar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+</section>
+
+<script src="app.js" defer></script>
+</body>
+</html>
