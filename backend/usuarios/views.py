@@ -24,9 +24,10 @@ def index(request):
 
         if asesor:
 
-            return render(request, 'solicitudes.html', {
-            'asesor': asesor
-            })
+            return redirect(
+                'solicitudes',
+                id_asesor=asesor.id_asesor
+          )
 
         elif asesorado:
 

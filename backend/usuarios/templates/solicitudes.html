@@ -74,20 +74,71 @@
                     </tr>
                 </thead>
                 <tbody id="solicitudesBody">
-                    <tr>
-                        <td>Pedro</td>
-                        <td>IA</td>
-                        <td>Pendiente</td>
-                        <td>5PM</td>
-                        <td><button class="action-btn">Aprobar</button></td>
-                    </tr>
-                    <tr>
-                        <td>Fernanda</td>
-                        <td>Web</td>
-                        <td>Aprobada</td>
-                        <td>6PM</td>
-                        <td><span class="status-tag">Sin acción</span></td>
-                    </tr>
+{% for solicitud in solicitudes %}
+
+<tr>
+
+    <td>
+        {{ solicitud.asesorado.nombre }}
+    </td>
+
+    <td>
+        General
+    </td>
+
+    <td>
+
+        {% if solicitud.estado == 'Pendiente' %}
+
+            <span class="pendiente">
+                Pendiente
+            </span>
+
+        {% elif solicitud.estado == 'Aceptada' %}
+
+            <span class="aprobada">
+                Aceptada
+            </span>
+
+        {% else %}
+
+            <span class="rechazada">
+                Rechazada
+            </span>
+
+        {% endif %}
+
+    </td>
+
+    <td>
+        {{ solicitud.fecha|date:"d/m/Y H:i" }}
+    </td>
+
+    <td>
+
+        {% if solicitud.estado == 'Pendiente' %}
+
+            <button class="action-btn">
+                Aprobar
+            </button>
+
+            <button class="reject-btn">
+                Rechazar
+            </button>
+
+        {% else %}
+
+            <span>
+                Sin acción
+            </span>
+
+        {% endif %}
+
+    </td>
+
+</tr>
+
+{% endfor %}
                 </tbody>
             </table>
         </div>
