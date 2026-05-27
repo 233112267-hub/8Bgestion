@@ -21,9 +21,16 @@ def index(request):
             contrasenia=password
         ).first()
 
-        if asesor or asesorado:
-            mensaje = "Login correcto"
+        if asesor:
+
+            mensaje = f"Bienvenido asesor {asesor.nombre}"
+
+        elif asesorado:
+
+            mensaje = f"Bienvenido asesorado {asesorado.nombre}"
+
         else:
+
             mensaje = "Usuario o contraseña incorrectos"
 
     return render(request, 'index.html', {
