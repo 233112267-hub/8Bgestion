@@ -56,10 +56,29 @@ class TemasDelAsesor(models.Model):
 
 class Asesoria(models.Model):
 
-    asesor = models.ForeignKey(Asesor, on_delete=models.CASCADE)
-    asesorado = models.ForeignKey(Asesorado, on_delete=models.CASCADE)
+    id_asesoria = models.AutoField(
+        primary_key=True
+    )
+
+    asesor = models.ForeignKey(
+        Asesor,
+        on_delete=models.CASCADE,
+        db_column='id_asesor'
+    )
+
+    asesorado = models.ForeignKey(
+        Asesorado,
+        on_delete=models.CASCADE,
+        db_column='id_asesorado'
+    )
+
     fecha = models.DateTimeField()
-    confirmada = models.BooleanField(default=False)
+
+    estado = models.CharField(
+        max_length=50,
+        default='Pendiente'
+    )
+
 
     class Meta:
         db_table = 'ASESORIA'

@@ -3,7 +3,8 @@ from django.urls import path
 from .views import (
     index,
     registro_asesor,
-    registro_asesorado
+    registro_asesorado,
+    solicitudes
 )
 
 urlpatterns = [
@@ -24,5 +25,11 @@ urlpatterns = [
         registro_asesorado,
         name='registro_asesorado'
     ),
+
+    path(
+    'solicitudes/<int:id_asesor>/',
+    solicitudes,
+    name='solicitudes'
+),
 
 ]

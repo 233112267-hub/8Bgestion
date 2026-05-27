@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Asesor, Asesorado
+from .models import Asesoria
 
 
 def index(request):
@@ -121,4 +122,21 @@ def registro_asesorado(request):
 
     return render(request, 'registro_asesorado.html', {
         'mensaje': mensaje
+    })
+
+def solicitudes(request, id_asesor):
+
+    asesor = Asesor.objects.get(
+        id_asesor=id_asesor
+    )
+
+    solicitudes = Asesoria.objects.filter(
+        asesor=asesor
+    )
+
+    return render(request, 'solicitudes.html', {
+
+        'asesor': asesor,
+        'solicitudes': solicitudes
+
     })
