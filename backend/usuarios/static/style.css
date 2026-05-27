@@ -7,24 +7,39 @@
 
 :root {
     color-scheme: light;
+
     --bg: #eef5ff;
     --surface: #ffffff;
     --surface-soft: #f6f9ff;
+
     --text: #1f2937;
     --muted: #64748b;
+
     --primary: #3b82f6;
     --primary-soft: #eff6ff;
+
     --success: #16a34a;
     --danger: #dc2626;
+
     --border: rgba(100, 116, 139, 0.18);
+
     --shadow: 0 30px 90px rgba(15, 23, 42, 0.12);
 }
 
 body {
     min-height: 100vh;
-    background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 25%),
-                radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.12), transparent 18%),
-                var(--bg);
+
+    background:
+        radial-gradient(circle at top left,
+        rgba(59, 130, 246, 0.18),
+        transparent 25%),
+
+        radial-gradient(circle at bottom right,
+        rgba(16, 185, 129, 0.12),
+        transparent 18%),
+
+        var(--bg);
+
     color: var(--text);
 }
 
@@ -37,60 +52,44 @@ select {
 
 button {
     padding: 14px 22px;
+
     border: none;
     border-radius: 16px;
+
     background: var(--primary);
-    color: #ffffff;
+    color: white;
+
     cursor: pointer;
-    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+
+    transition: .2s;
+
     box-shadow: 0 18px 30px rgba(59, 130, 246, 0.18);
 }
 
 button:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     background: #2563eb;
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-button.action-btn {
-    padding: 10px 14px;
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-    box-shadow: none;
-    border-radius: 12px;
-}
-
-button.action-btn:hover {
-    background: var(--surface-soft);
-}
-
-button.action-btn[data-action="approve"] {
-    color: var(--success);
-    border-color: rgba(22, 163, 74, 0.22);
-}
-
-button.action-btn[data-action="reject"] {
-    color: var(--danger);
-    border-color: rgba(220, 38, 38, 0.22);
 }
 
 input {
     width: 100%;
+
     padding: 14px 16px;
+
     border-radius: 16px;
+
     border: 1px solid var(--border);
+
     background: var(--surface-soft);
+
     color: var(--text);
-    transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 input:focus {
     outline: none;
+
     border-color: rgba(59, 130, 246, 0.35);
+
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
 }
 
@@ -98,75 +97,74 @@ input::placeholder {
     color: var(--muted);
 }
 
-.message {
-    margin-top: 10px;
-    min-height: 22px;
-    color: var(--text);
-    font-size: 0.95rem;
-}
-
-.message.error {
-    color: var(--danger);
-}
-
-.message.success {
-    color: var(--success);
-}
+/* =========================================
+   LOGIN
+========================================= */
 
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
+
     min-height: 100vh;
+
     padding: 24px;
 }
 
-/* LOGIN */
-
 .login-box {
     width: min(420px, 100%);
-    background: rgba(255, 255, 255, 0.9);
+
+    background: rgba(255,255,255,0.92);
+
     padding: 42px 36px;
+
+    border-radius: 32px;
+
     display: flex;
     flex-direction: column;
     gap: 22px;
-    border-radius: 32px;
+
     box-shadow: var(--shadow);
+
     backdrop-filter: blur(12px);
 }
 
 .login-box h1 {
-    font-size: 1.8rem;
-    color: var(--text);
     text-align: center;
+    font-size: 1.8rem;
 }
 
 .logo {
     width: 88px;
     height: 88px;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.96), rgba(16, 185, 129, 0.95));
-    border-radius: 24px;
+
     margin: 0 auto;
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59,130,246,.96),
+            rgba(16,185,129,.95)
+        );
 }
 
-.login-box input {
-    padding: 14px 16px;
-    border-radius: 16px;
-}
-
-.login-box button {
-    width: 100%;
-}
-
-/* FORMULARIO */
+/* =========================================
+   FORMULARIO
+========================================= */
 
 .formulario {
     width: min(1180px, 100%);
+
     margin: 36px auto;
+
     padding: 36px;
-    background: rgba(255, 255, 255, 0.85);
+
+    background: rgba(255,255,255,0.88);
+
     border-radius: 34px;
+
     box-shadow: var(--shadow);
 }
 
@@ -185,143 +183,175 @@ input::placeholder {
 
 .fields-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    grid-template-columns: repeat(2,1fr);
+
     gap: 18px;
+
     margin-bottom: 22px;
-}
-
-.switch {
-    width: 140px;
-    height: 46px;
-    margin-bottom: 24px;
-    background: var(--surface-soft);
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    position: relative;
-    cursor: pointer;
-}
-
-.switch::before {
-    content: '';
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: var(--primary);
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    transition: left .25s ease, right .25s ease;
-}
-
-.switch::after {
-    content: 'Estudiante';
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-weight: 600;
-}
-
-.switch.active::before {
-    left: 4px;
-    right: auto;
-}
-
-.switch.active::after {
-    content: 'Profesor';
 }
 
 .codigo {
     display: flex;
     gap: 12px;
+
     margin-bottom: 18px;
 }
 
-.codigo .code-digit {
-    width: 100%;
+.code-digit {
     max-width: 70px;
+
     text-align: center;
+
     font-size: 1.2rem;
     font-weight: 700;
 }
 
-#registerCode {
-    background: var(--surface-soft);
-    border: 1px solid var(--border);
-}
-
-/* PANEL */
+/* =========================================
+   PANEL PRINCIPAL
+========================================= */
 
 .panel {
-    display: grid;
-    grid-template-columns: 220px minmax(0, 1fr);
+    display: flex;
     min-height: 100vh;
 }
 
+/* =========================================
+   SIDEBAR
+========================================= */
+
 .sidebar {
-    padding: 32px 22px;
-    background: rgba(255, 255, 255, 0.95);
-    border-right: 1px solid rgba(148, 163, 184, 0.12);
+    width: 240px;
+
+    background: rgba(255,255,255,0.95);
+
+    padding: 28px 20px;
+
+    border-right: 1px solid rgba(148,163,184,0.12);
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    height: 100vh;
 }
 
 .avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.95), rgba(16, 185, 129, 0.95));
+    width: 75px;
+    height: 75px;
+
     margin: 0 auto;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(59,130,246,.95),
+            rgba(16,185,129,.95)
+        );
 }
 
 .user p {
     margin-top: 16px;
+
     text-align: center;
-    font-weight: 700;
+
+    font-weight: bold;
 }
 
 .menu {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 14px;
+
     margin-top: 32px;
 }
 
 .menu a {
-    display: block;
     padding: 14px 16px;
+
     border-radius: 18px;
-    color: var(--text);
-    text-decoration: none;
+
     background: var(--surface-soft);
-    transition: background .2s ease, transform .2s ease;
+
+    text-decoration: none;
+
+    color: var(--text);
+
+    transition: .2s;
 }
 
 .menu a:hover {
     background: var(--primary-soft);
-    transform: translateX(2px);
+    transform: translateX(3px);
 }
+
+/* =========================================
+   BARRA
+========================================= */
 
 .barra {
     width: 20px;
-    border-radius: 0 24px 24px 0;
+
+    position: fixed;
+
+    left: 240px;
+    top: 0;
+
+    height: 100vh;
 }
 
 .azul {
-    background: linear-gradient(180deg, #3b82f6, #1e40af);
+    background:
+        linear-gradient(
+            180deg,
+            #3b82f6,
+            #1e40af
+        );
 }
 
 .gris {
-    background: linear-gradient(180deg, #9ca3af, #4b5563);
+    background:
+        linear-gradient(
+            180deg,
+            #9ca3af,
+            #4b5563
+        );
 }
+
+/* =========================================
+   CONTENIDO
+========================================= */
 
 .contenido {
-    padding: 36px;
-}
 
-.page-header {
+    margin-left: 260px;
+
+    width: calc(100% - 260px);
+
+    padding: 40px;
+
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.page-header {
+
+    width: 100%;
+    max-width: 1100px;
+
+    display: flex;
+    flex-direction: column;
+
     gap: 8px;
+
     margin-bottom: 28px;
 }
 
@@ -333,14 +363,29 @@ input::placeholder {
     color: var(--muted);
 }
 
+/* =========================================
+   CARDS
+========================================= */
+
 .card {
+
+    width: 100%;
+    max-width: 1100px;
+
     background: var(--surface);
-    border-radius: 20px;
+
+    border-radius: 22px;
+
     padding: 25px;
+
     margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+/* =========================================
+   TABLAS
+========================================= */
 
 table {
     width: 100%;
@@ -350,60 +395,146 @@ table {
 thead {
     background: var(--primary-soft);
 }
+
 th {
-    background: #f2f2f2;
-    padding: 15px;
+    padding: 16px;
     text-align: left;
+
+    font-weight: 700;
 }
 
 td {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-
-
-tbody tr {
-    background: var(--surface);
+tbody tr:hover {
+    background: #f9fbff;
 }
 
-tbody tr + tr {
-    border-top: 1px solid rgba(148, 163, 184, 0.15);
+/* =========================================
+   BOTONES
+========================================= */
+
+.action-btn {
+
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background: var(--primary);
+
+    color: white;
 }
 
-.status-tag {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(100, 116, 139, 0.12);
-    color: var(--text);
-    font-size: 0.92rem;
+.action-btn:hover {
+    background: #2563eb;
 }
+
+.reject-btn {
+
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background: var(--danger);
+
+    color: white;
+
+    margin-left: 10px;
+}
+
+.reject-btn:hover {
+    background: #b91c1c;
+}
+
+/* =========================================
+   ESTADOS
+========================================= */
+
+.pendiente {
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.aprobada {
+    color: var(--success);
+    font-weight: bold;
+}
+
+.rechazada {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+/* =========================================
+   REGISTRO OPCIONES
+========================================= */
+
+.register-options {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register-options p {
+    margin-bottom: 10px;
+}
+
+.register-options a {
+
+    display: block;
+
+    margin: 10px auto;
+
+    width: 80%;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: var(--primary);
+
+    color: white;
+
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+.register-options a:hover {
+    background: #2563eb;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
 
 @media (max-width: 980px) {
- 
-    /* PANEL */
-.panel {
-    display: grid;
-    grid-template-columns: 240px minmax(0, 1fr);
-    min-height: 100vh;
-}
 
-.sidebar {
-    width: 240px;
-    background: rgba(255,255,255,0.95);
-    padding: 20px;
-    position: fixed;
-    height: 100vh;
-}
+    .sidebar {
+        width: 200px;
+    }
 
-.contenido {
-    margin-left: 260px;
-    width: calc(100% - 260px);
-    padding: 40px;
-}
+    .barra {
+        left: 200px;
+    }
+
+    .contenido {
+
+        margin-left: 220px;
+
+        width: calc(100% - 220px);
+
+        padding: 20px;
+    }
 
     .fields-grid {
         grid-template-columns: 1fr;
@@ -411,24 +542,39 @@ tbody tr + tr {
 }
 
 @media (max-width: 720px) {
-    .login-box {
-        padding: 28px 22px;
+
+    .panel {
+        flex-direction: column;
     }
 
-    .formulario {
-        padding: 24px;
+    .sidebar {
+
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+        border-right: none;
     }
 
-    .codigo {
-        flex-wrap: wrap;
+    .barra {
+        display: none;
+    }
+
+    .contenido {
+
+        margin-left: 0;
+
+        width: 100%;
     }
 
     table,
     thead,
     tbody,
-    th,
+    tr,
     td,
-    tr {
+    th {
         display: block;
     }
 
@@ -437,53 +583,17 @@ tbody tr + tr {
     }
 
     tr {
+
         margin-bottom: 18px;
-        border-radius: 24px;
+
+        background: white;
+
+        border-radius: 18px;
+
         overflow: hidden;
-        box-shadow: var(--shadow);
     }
 
     td {
-        padding: 14px 18px;
-        text-align: left;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+        border-bottom: 1px solid #eee;
     }
-
-    td:last-child {
-        border-bottom: none;
-    }
-}
-.register-options{
-    margin-top: 20px;
-    text-align: center;
-}
-
-.register-options p{
-    margin-bottom: 10px;
-}
-
-.register-options a{
-    display: block;
-    margin: 10px auto;
-    padding: 10px;
-    width: 80%;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: 0.3s;
-}
-
-.register-options a:hover{
-    background-color: #45a049;
-}
-.action-btn{
-    padding: 10px 15px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.page-header{
-    margin-bottom: 20px;
 }
