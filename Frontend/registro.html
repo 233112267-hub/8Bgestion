@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body data-page="registro">
+
+<section class="formulario">
+
+    <form id="registerForm" method="post" action="http://localhost:8000/registro/asesorado/">
+        <div class="form-head">
+            <h1>Registro</h1>
+            <p>Completa tus datos para crear tu usuario.</p>
+        </div>
+
+        <div class="switch" id="typeSwitch" role="button" tabindex="0" aria-label="Cambiar tipo de usuario"></div>
+
+        <div class="fields-grid">
+            <input id="registerName" name="nombre" type="text" placeholder="Nombre">
+            <input id="registerEmail" name="email" type="email" placeholder="Correo">
+            <input id="registerUser" name="usuario" type="text" placeholder="Usuario">
+            <input id="registerCareer" name="carrera" type="text" placeholder="Carrera">
+            <input id="registerPassword" name="password" type="password" placeholder="Contraseña">
+        </div>
+
+        <!-- Tarifa: usado cuando se registra como Asesor (Profesor). Oculto por defecto y mostrado cuando el switch indica Profesor -->
+        <input id="registerTarifa" name="tarifa" type="text" placeholder="Tarifa (por hora)" style="display:none; margin-top:8px;">
+
+        <div class="codigo">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+            <input class="code-digit" type="text" maxlength="1">
+        </div>
+
+        <input id="registerCode" type="text" placeholder="Código completo" readonly>
+        <button type="submit">Registrar</button>
+        <p id="registerMessage" class="message"></p>
+    </form>
+
+</section>
+
+<script src="app.js" defer></script>
+</body>
+</html>
