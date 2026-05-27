@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body class="center" data-page="login">
+
+    <div class="login-box">
+
+        <div class="logo"></div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <h1>Iniciar sesión</h1>
+
+            <input
+                name="usuario"
+                type="text"
+                placeholder="Usuario"
+                autocomplete="username"
+            >
+
+            <input
+                name="password"
+                type="password"
+                placeholder="Contraseña"
+                autocomplete="current-password"
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+            <p class="message">
+                {{ mensaje }}
+            </p>
+
+        </form>
+
+        <div class="register-options">
+
+            <p>¿No tienes cuenta?</p>
+
+            <a href="/registro/asesor/">
+                Registrarse como Asesor
+            </a>
+
+            <a href="/registro/asesorado/">
+                Registrarse como Asesorado
+            </a>
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'app.js' %}" defer></script>
+
+</body>
+</html>
