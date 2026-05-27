@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Asesor, Asesorado
 
 
@@ -34,5 +34,85 @@ def index(request):
             mensaje = "Usuario o contraseña incorrectos"
 
     return render(request, 'index.html', {
+        'mensaje': mensaje
+    })
+
+
+# -----------------------------------
+# REGISTRO ASESOR
+# -----------------------------------
+
+def registro_asesor(request):
+
+    mensaje = ""
+
+    if request.method == "POST":
+
+        nombre = request.POST.get("nombre")
+        email = request.POST.get("email")
+        usuario = request.POST.get("usuario")
+        password = request.POST.get("password")
+        tarifa = request.POST.get("tarifa")
+
+        existe = Asesor.objects.filter(
+            nombre_usuario=usuario
+        ).exists()
+
+        if existe:
+
+            mensaje = "El usuario ya existe"
+
+        else:
+
+            Asesor.objects.create(
+                nombre=nombre,
+                email=email,
+                nombre_usuario=usuario,
+                contrasenia=password,
+                tarifa=tarifa
+            )
+
+            mensaje = "Asesor registrado correctamente"
+
+    return render(request, 'registro_asesor.html', {
+        'mensaje': mensaje
+    })
+
+
+# -----------------------------------
+# REGISTRO ASESORADO
+# -----------------------------------
+
+def registro_asesorado(request):
+
+    mensaje = ""
+
+    if request.method == "POST":
+
+        nombre = request.POST.get("nombre")
+        email = request.POST.get("email")
+        usuario = request.POST.get("usuario")
+        password = request.POST.get("password")
+
+        existe = Asesorado.objects.filter(
+            nombre_usuario=usuario
+        ).exists()
+
+        if existe:
+
+            mensaje = "El usuario ya existe"
+
+        else:
+
+            Asesorado.objects.create(
+                nombre=nombre,
+                email=email,
+                nombre_usuario=usuario,
+                contrasenia=password
+            )
+
+            mensaje = "Asesorado registrado correctamente"
+
+    return render(request, 'registro_asesorado.html', {
         'mensaje': mensaje
     })
