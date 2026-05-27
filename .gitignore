@@ -1,0 +1,36 @@
+8Bgestion/
+│
+├── backend/
+│   │
+│   ├── buenosasesores/
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   ├── asgi.py
+│   │   └── wsgi.py
+│   │
+│   ├── usuarios/
+│   │   │
+│   │   ├── migrations/
+│   │   │
+│   │   ├── templates/
+│   │   │   ├── index.html
+│   │   │   ├── registro.html
+│   │   │   ├── asesorias.html
+│   │   │   └── solicitudes.html
+│   │   │
+│   │   ├── static/
+│   │   │   ├── style.css
+│   │   │   └── app.js
+│   │   │
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── tests.py
+│   │   ├── views.py
+│   │   └── urls.py
+│   │
+│   └── manage.py
+│
+├── README.md (opcional)
+└── .gitignore (opcional)
