@@ -23,12 +23,18 @@ def index(request):
 
         if asesor:
 
-            mensaje = f"Bienvenido asesor {asesor.nombre}"
+            return render(request, 'solicitudes.html', {
+            'asesor': asesor
+            })
 
         elif asesorado:
 
-            mensaje = f"Bienvenido asesorado {asesorado.nombre}"
+            asesores = Asesor.objects.all()
 
+            return render(request, 'asesorias.html', {
+               'asesorado': asesorado,
+               'asesores': asesores
+    })
         else:
 
             mensaje = "Usuario o contraseña incorrectos"
