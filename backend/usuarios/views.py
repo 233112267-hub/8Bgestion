@@ -33,10 +33,10 @@ def index(request):
 
             asesores = Asesor.objects.all()
 
-            return render(request, 'asesorias.html', {
-               'asesorado': asesorado,
-               'asesores': asesores
-    })
+            return redirect(
+                'asesorias',
+                id_asesorado=asesorado.id_asesorado
+)
         else:
 
             mensaje = "Usuario o contraseña incorrectos"
@@ -139,5 +139,25 @@ def solicitudes(request, id_asesor):
 
         'asesor': asesor,
         'solicitudes': solicitudes
+
+    })
+
+def asesorias(request, id_asesorado):
+
+    asesorado = Asesorado.objects.get(
+        id_asesorado=id_asesorado
+    )
+
+    asesores = Asesor.objects.all()
+
+    mis_asesorias = Asesoria.objects.filter(
+        asesorado=asesorado
+    )
+
+    return render(request, 'asesorias.html', {
+
+        'asesorado': asesorado,
+        'asesores': asesores,
+        'mis_asesorias': mis_asesorias
 
     })

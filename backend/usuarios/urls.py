@@ -4,7 +4,8 @@ from .views import (
     index,
     registro_asesor,
     registro_asesorado,
-    solicitudes
+    solicitudes,
+    asesorias
 )
 
 urlpatterns = [
@@ -27,9 +28,13 @@ urlpatterns = [
     ),
 
     path(
-    'solicitudes/<int:id_asesor>/',
-    solicitudes,
-    name='solicitudes'
+        'solicitudes/<int:id_asesor>/',
+        solicitudes,
+        name='solicitudes'
+    ),
+    path(
+        'asesorias/<int:id_asesorado>/',
+        asesorias,
+        name='asesorias'
 ),
-
 ]
