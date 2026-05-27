@@ -87,18 +87,44 @@ function initLogin() {
     const password = document.getElementById('loginPassword');
     const code = document.getElementById('loginCode');
     const message = document.getElementById('loginMessage');
+    const users = storage.get('registeredUsers', []);
 
     if (!form) return;
 
     form.addEventListener('submit', event => {
         event.preventDefault();
-        if (!user.value.trim() || !password.value.trim() || !code.value.trim()) {
+
+        const username = user.value.trim();
+        const passwordValue = password.value.trim();
+        const codeValue = code.value.trim();
+
+        if (!username || !passwordValue || !codeValue) {
             showMessage(message, 'Completa todos los campos para ingresar.', false);
             return;
         }
 
-        storage.set('loggedUser', { usuario: user.value.trim(), fecha: new Date().toISOString() });
-        window.location.href = 'asesorias.html';
+        const matchedUser = users.find(item =>
+            item.usuario === username &&
+            item.password === passwordValue &&
+            item.codigo === codeValue
+        );
+
+        if (!matchedUser) {
+            showMessage(message, 'Usuario no registrado o credenciales incorrectas.', false);
+            return;
+        }
+
+        storage.set('loggedUser', {
+            usuario: matchedUser.usuario,
+            tipo: matchedUser.tipo,
+            fecha: new Date().toISOString()
+        });
+
+        if (matchedUser.tipo === 'Estudiante') {
+            window.location.href = 'asesorias.html';
+        } else {
+            window.location.href = 'solicitudes.html';
+        }
     });
 }
 
@@ -153,6 +179,7 @@ function initRegister() {
             correo: emailInput.value.trim(),
             usuario: userInput.value.trim(),
             carrera: careerInput.value.trim(),
+            password: passwordInput.value.trim(),
             tipo: switchToggle.classList.contains('active') ? 'Profesor' : 'Estudiante',
             codigo: codeInput.value
         });
