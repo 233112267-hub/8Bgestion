@@ -445,3 +445,27 @@ tbody tr + tr {
         border-bottom: none;
     }
 }
+.register-options{
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register-options p{
+    margin-bottom: 10px;
+}
+
+.register-options a{
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 80%;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.register-options a:hover{
+    background-color: #45a049;
+}
