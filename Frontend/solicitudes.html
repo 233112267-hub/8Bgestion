@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solicitudes</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body data-page="solicitudes">
+
+<section class="panel">
+
+    <aside class="sidebar">
+
+        <div class="user">
+            <div class="avatar"></div>
+            <p>Mike Dean</p>
+        </div>
+
+        <nav class="menu">
+            <a href="#" data-nav="index.html">🏠 Home</a>
+            <a href="#" data-nav="asesorias.html">📄 Asesorías</a>
+            <a href="#" data-nav="solicitudes.html">📄 Solicitudes</a>
+            <a href="#" data-nav="registro.html">📝 Registro</a>
+        </nav>
+
+    </aside>
+
+    <div class="barra gris"></div>
+
+    <main class="contenido">
+
+        <div class="page-header">
+            <h2>Asesorías</h2>
+            <p>Revisa las asesorías activas y administra tus solicitudes.</p>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Materia</th>
+                        <th>Profesor</th>
+                        <th>Horario</th>
+                    </tr>
+                </thead>
+                <tbody id="asesoriasBody">
+                    <tr>
+                        <td>Juan</td>
+                        <td>POO</td>
+                        <td>Mario</td>
+                        <td>9AM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="page-header">
+            <h2>Solicitudes</h2>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Alumno</th>
+                        <th>Materia</th>
+                        <th>Estado</th>
+                        <th>Hora</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="solicitudesBody">
+                    <tr>
+                        <td>Pedro</td>
+                        <td>IA</td>
+                        <td>Pendiente</td>
+                        <td>5PM</td>
+                        <td><button class="action-btn">Aprobar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Fernanda</td>
+                        <td>Web</td>
+                        <td>Aprobada</td>
+                        <td>6PM</td>
+                        <td><span class="status-tag">Sin acción</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+</section>
+
+<script src="app.js" defer></script>
+</body>
+</html>
