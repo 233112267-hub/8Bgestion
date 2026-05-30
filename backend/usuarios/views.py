@@ -1,7 +1,16 @@
-from django.shortcuts import render, redirect
-from .models import Asesor, Asesorado
-from .models import Asesoria
+from django.shortcuts import render, redirect, get_object_or_404
 
+from .models import (
+    Asesor,
+    Asesorado,
+    Asesoria,
+    Horario
+)
+
+
+# =========================================
+# LOGIN
+# =========================================
 
 def index(request):
 
@@ -12,43 +21,72 @@ def index(request):
         usuario = request.POST.get("usuario")
         password = request.POST.get("password")
 
+        # -----------------------------
+        # LOGIN ASESOR
+        # -----------------------------
+
         asesor = Asesor.objects.filter(
             nombre_usuario=usuario,
             contrasenia=password
         ).first()
+
+        if not asesor:
+
+            asesor = Asesor.objects.filter(
+                email=usuario,
+                contrasenia=password
+            ).first()
+
+        # -----------------------------
+        # LOGIN ASESORADO
+        # -----------------------------
 
         asesorado = Asesorado.objects.filter(
             nombre_usuario=usuario,
             contrasenia=password
         ).first()
 
+        if not asesorado:
+
+            asesorado = Asesorado.objects.filter(
+                email=usuario,
+                contrasenia=password
+            ).first()
+
+        # -----------------------------
+        # REDIRECCIONES
+        # -----------------------------
+
         if asesor:
 
             return redirect(
                 'solicitudes',
                 id_asesor=asesor.id_asesor
-          )
+            )
 
         elif asesorado:
-
-            asesores = Asesor.objects.all()
 
             return redirect(
                 'asesorias',
                 id_asesorado=asesorado.id_asesorado
-)
+            )
+
         else:
 
             mensaje = "Usuario o contraseña incorrectos"
 
-    return render(request, 'index.html', {
-        'mensaje': mensaje
-    })
+    return render(
+        request,
+        'index.html',
+        {
+            'mensaje': mensaje
+        }
+    )
 
 
-# -----------------------------------
+# =========================================
 # REGISTRO ASESOR
-# -----------------------------------
+# =========================================
 
 def registro_asesor(request):
 
@@ -60,15 +98,24 @@ def registro_asesor(request):
         email = request.POST.get("email")
         usuario = request.POST.get("usuario")
         password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
         tarifa = request.POST.get("tarifa")
 
-        existe = Asesor.objects.filter(
-            nombre_usuario=usuario
-        ).exists()
+        if password != confirm_password:
 
-        if existe:
+            mensaje = "Las contraseñas no coinciden"
+
+        elif Asesor.objects.filter(
+            nombre_usuario=usuario
+        ).exists():
 
             mensaje = "El usuario ya existe"
+
+        elif Asesor.objects.filter(
+            email=email
+        ).exists():
+
+            mensaje = "El correo ya existe"
 
         else:
 
@@ -77,19 +124,24 @@ def registro_asesor(request):
                 email=email,
                 nombre_usuario=usuario,
                 contrasenia=password,
-                tarifa=tarifa
+                tarifa=tarifa,
+                disponibilidad=True
             )
 
             mensaje = "Asesor registrado correctamente"
 
-    return render(request, 'registro_asesor.html', {
-        'mensaje': mensaje
-    })
+    return render(
+        request,
+        'registro_asesor.html',
+        {
+            'mensaje': mensaje
+        }
+    )
 
 
-# -----------------------------------
+# =========================================
 # REGISTRO ASESORADO
-# -----------------------------------
+# =========================================
 
 def registro_asesorado(request):
 
@@ -101,14 +153,23 @@ def registro_asesorado(request):
         email = request.POST.get("email")
         usuario = request.POST.get("usuario")
         password = request.POST.get("password")
+        confirm_password = request.POST.get("confirm_password")
 
-        existe = Asesorado.objects.filter(
+        if password != confirm_password:
+
+            mensaje = "Las contraseñas no coinciden"
+
+        elif Asesorado.objects.filter(
             nombre_usuario=usuario
-        ).exists()
-
-        if existe:
+        ).exists():
 
             mensaje = "El usuario ya existe"
+
+        elif Asesorado.objects.filter(
+            email=email
+        ).exists():
+
+            mensaje = "El correo ya existe"
 
         else:
 
@@ -121,30 +182,48 @@ def registro_asesorado(request):
 
             mensaje = "Asesorado registrado correctamente"
 
-    return render(request, 'registro_asesorado.html', {
-        'mensaje': mensaje
-    })
+    return render(
+        request,
+        'registro_asesorado.html',
+        {
+            'mensaje': mensaje
+        }
+    )
+
+
+# =========================================
+# PANEL DEL ASESOR
+# =========================================
 
 def solicitudes(request, id_asesor):
 
-    asesor = Asesor.objects.get(
+    asesor = get_object_or_404(
+        Asesor,
         id_asesor=id_asesor
     )
 
     solicitudes = Asesoria.objects.filter(
         asesor=asesor
+    ).order_by('-id_asesoria')
+
+    return render(
+        request,
+        'solicitudes.html',
+        {
+            'asesor': asesor,
+            'solicitudes': solicitudes
+        }
     )
 
-    return render(request, 'solicitudes.html', {
 
-        'asesor': asesor,
-        'solicitudes': solicitudes
-
-    })
+# =========================================
+# PANEL DEL ASESORADO
+# =========================================
 
 def asesorias(request, id_asesorado):
 
-    asesorado = Asesorado.objects.get(
+    asesorado = get_object_or_404(
+        Asesorado,
         id_asesorado=id_asesorado
     )
 
@@ -152,12 +231,94 @@ def asesorias(request, id_asesorado):
 
     mis_asesorias = Asesoria.objects.filter(
         asesorado=asesorado
+    ).order_by('-id_asesoria')
+
+    return render(
+        request,
+        'asesorias.html',
+        {
+            'asesorado': asesorado,
+            'asesores': asesores,
+            'mis_asesorias': mis_asesorias
+        }
     )
 
-    return render(request, 'asesorias.html', {
 
-        'asesorado': asesorado,
-        'asesores': asesores,
-        'mis_asesorias': mis_asesorias
+# =========================================
+# CREAR SOLICITUD
+# =========================================
 
-    })
+def solicitar_asesoria(
+    request,
+    id_asesorado,
+    id_asesor
+):
+
+    asesorado = get_object_or_404(
+        Asesorado,
+        id_asesorado=id_asesorado
+    )
+
+    asesor = get_object_or_404(
+        Asesor,
+        id_asesor=id_asesor
+    )
+
+    Asesoria.objects.create(
+        asesor=asesor,
+        asesorado=asesorado,
+        estado='Pendiente',
+        tipo='Individual',
+        comentario='Solicitud enviada'
+    )
+
+    return redirect(
+        'asesorias',
+        id_asesorado=id_asesorado
+    )
+
+
+# =========================================
+# ACEPTAR SOLICITUD
+# =========================================
+
+def aceptar_solicitud(
+    request,
+    id_asesoria
+):
+
+    asesoria = get_object_or_404(
+        Asesoria,
+        id_asesoria=id_asesoria
+    )
+
+    asesoria.estado = "Aceptada"
+    asesoria.save()
+
+    return redirect(
+        'solicitudes',
+        id_asesor=asesoria.asesor.id_asesor
+    )
+
+
+# =========================================
+# RECHAZAR SOLICITUD
+# =========================================
+
+def rechazar_solicitud(
+    request,
+    id_asesoria
+):
+
+    asesoria = get_object_or_404(
+        Asesoria,
+        id_asesoria=id_asesoria
+    )
+
+    asesoria.estado = "Rechazada"
+    asesoria.save()
+
+    return redirect(
+        'solicitudes',
+        id_asesor=asesoria.asesor.id_asesor
+    )

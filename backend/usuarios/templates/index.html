@@ -5,13 +5,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | Sistema de Asesorías</title>
 
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
 <body class="center" data-page="login">
 
+    <!-- FONDO ANIMADO -->
+    <div class="background-animation">
+
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </div>
+
+    <!-- LOGIN -->
     <div class="login-box">
 
         <div class="logo"></div>
@@ -20,32 +37,55 @@
 
             {% csrf_token %}
 
-            <h1>Iniciar sesión</h1>
+            <h1> Iniciar Sesión</h1>
 
+            <p class="subtitle">
+                Sistema inteligente de asesorías
+            </p>
+
+            <!-- USUARIO -->
             <input
                 name="usuario"
                 type="text"
-                placeholder="Usuario"
+                placeholder="📧 Correo o usuario"
                 autocomplete="username"
+                required
             >
+            <br>
+            <!-- PASSWORD -->
+            <div class="password-container">
 
-            <input
-                name="password"
-                type="password"
-                placeholder="Contraseña"
-                autocomplete="current-password"
-            >
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="🔒 Contraseña"
+                    autocomplete="current-password"
+                    required
+                >
+            <br>
+            <br>
+                <span class="toggle-password"
+                onclick="togglePassword()">
 
+
+                </span>
+
+            </div>
+
+            <!-- BOTON -->
             <button type="submit">
-                Login
+                Ingresar
             </button>
 
+            <!-- MENSAJE -->
             <p class="message">
                 {{ mensaje }}
             </p>
 
         </form>
 
+        <!-- REGISTROS -->
         <div class="register-options">
 
             <p>¿No tienes cuenta?</p>
@@ -62,7 +102,26 @@
 
     </div>
 
-    <script src="{% static 'app.js' %}" defer></script>
+    <!-- SCRIPT -->
+    <script>
+
+        function togglePassword(){
+
+            const password =
+            document.getElementById("password");
+
+            if(password.type === "password"){
+
+                password.type = "text";
+
+            }else{
+
+                password.type = "password";
+
+            }
+        }
+
+    </script>
 
 </body>
 </html>

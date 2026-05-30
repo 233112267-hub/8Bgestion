@@ -36,5 +36,23 @@ urlpatterns = [
         'asesorias/<int:id_asesorado>/',
         asesorias,
         name='asesorias'
-),
+    ),
+
+    path(
+    'solicitar/<int:id_asesorado>/<int:id_asesor>/',
+    solicitar_asesoria,
+    name='solicitar_asesoria'
+    ),
+
+    path(
+    'aceptar/<int:id_asesoria>/',
+    aceptar_solicitud,
+    name='aceptar_solicitud'
+    ),
+
+    path(
+    'rechazar/<int:id_asesoria>/',
+    rechazar_solicitud,
+    name='rechazar_solicitud'
+    ),
 ]

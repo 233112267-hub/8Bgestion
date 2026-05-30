@@ -1,152 +1,178 @@
+
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solicitudes</title>
-<link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Solicitudes</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
 </head>
 
-<body data-page="solicitudes">
+<body>
 
-<section class="panel">
+<div class="panel">
+
+    <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
+        <div class="avatar"></div>
+
         <div class="user">
-            <div class="avatar"></div>
             <p>{{ asesor.nombre }}</p>
         </div>
 
         <nav class="menu">
-            <a href="#" data-nav="index.html">🏠 Home</a>
-            <a href="#" data-nav="asesorias.html">📄 Asesorías</a>
-            <a href="#" data-nav="solicitudes.html">📄 Solicitudes</a>
-            <a href="#" data-nav="registro.html">📝 Registro</a>
+
+            <a href="">
+                Solicitar asesoría
+            </a>
+
+            <a href="">
+                Horarios
+            </a>
+
+            <a href="/">
+                Cerrar sesión
+            </a>
+
         </nav>
 
     </aside>
 
-    <div class="barra gris"></div>
+    <!-- BARRA -->
+
+    <div class="barra azul"></div>
+
+    <!-- CONTENIDO -->
 
     <main class="contenido">
 
         <div class="page-header">
-            <h2>Asesorías</h2>
-            <p>Revisa las asesorías activas y administra tus solicitudes.</p>
+
+            <h2>
+                Solicitudes de asesoría
+            </h2>
+
+            <p>
+                Aquí puedes revisar las solicitudes recibidas.
+            </p>
+
         </div>
+
+        <!-- TABLA -->
 
         <div class="card">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Materia</th>
-                        <th>Profesor</th>
-                        <th>Horario</th>
-                    </tr>
-                </thead>
-                <tbody id="asesoriasBody">
-                    <tr>
-                        <td>Juan</td>
-                        <td>POO</td>
-                        <td>Mario</td>
-                        <td>9AM</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
 
-        <div class="page-header">
-            <h2>Solicitudes</h2>
-        </div>
-
-        <div class="card">
             <table>
+
                 <thead>
+
                     <tr>
+
                         <th>Alumno</th>
-                        <th>Materia</th>
+
+                        <th>Día</th>
+
+                        <th>Horario</th>
+
+                        <th>Tipo</th>
+
                         <th>Estado</th>
-                        <th>Hora</th>
-                        <th>Acción</th>
+
+                        <th>Comentario</th>
+
                     </tr>
+
                 </thead>
-                <tbody id="solicitudesBody">
-{% for solicitud in solicitudes %}
 
-<tr>
+                <tbody>
 
-    <td>
-        {{ solicitud.asesorado.nombre }}
-    </td>
+                    {% for solicitud in solicitudes %}
 
-    <td>
-        General
-    </td>
+                    <tr>
 
-    <td>
+                        <td>
+                            {{ solicitud.asesorado.nombre }}
+                        </td>
 
-        {% if solicitud.estado == 'Pendiente' %}
+                        <td>
+                            {{ solicitud.horario.dia_semana }}
+                        </td>
 
-            <span class="pendiente">
-                Pendiente
-            </span>
+                        <td>
+                            {{ solicitud.horario.hora_inicio }}
+                            -
+                            {{ solicitud.horario.hora_fin }}
+                        </td>
 
-        {% elif solicitud.estado == 'Aceptada' %}
+                        <td>
+                            {{ solicitud.tipo }}
+                        </td>
 
-            <span class="aprobada">
-                Aceptada
-            </span>
+                        <td>
 
-        {% else %}
+                            {% if solicitud.estado == 'Aceptada' %}
 
-            <span class="rechazada">
-                Rechazada
-            </span>
+                                <span class="aprobada">
+                                    {{ solicitud.estado }}
+                                </span>
 
-        {% endif %}
+                            {% elif solicitud.estado == 'Pendiente' %}
 
-    </td>
+                                <span class="pendiente">
+                                    {{ solicitud.estado }}
+                                </span>
 
-    <td>
-        {{ solicitud.fecha|date:"d/m/Y H:i" }}
-    </td>
+                            {% else %}
 
-    <td>
+                                <span class="rechazada">
+                                    {{ solicitud.estado }}
+                                </span>
 
-        {% if solicitud.estado == 'Pendiente' %}
+                            {% endif %}
 
-            <button class="action-btn">
-                Aprobar
-            </button>
+                        </td>
 
-            <button class="reject-btn">
-                Rechazar
-            </button>
+                        <td>
+                            {{ solicitud.comentario }}
+                        </td>
 
-        {% else %}
+                    </tr>
 
-            <span>
-                Sin acción
-            </span>
+                    {% empty %}
 
-        {% endif %}
+                    <tr>
 
-    </td>
+                        <td colspan="6">
 
-</tr>
+                            No hay solicitudes registradas
 
-{% endfor %}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
                 </tbody>
+
             </table>
+
         </div>
 
     </main>
 
-</section>
+</div>
 
-<script src="app.js" defer></script>
 </body>
+
 </html>
+
